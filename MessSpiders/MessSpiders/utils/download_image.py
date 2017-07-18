@@ -9,15 +9,16 @@ import requests
 
 
 def download_image(direct_name, cur_path=os.getcwd(), *kwgs):
-    img_path = cur_path + '/' + direct_name
-    os.makedirs(img_path)
+    img_path = cur_path + os.sep + "".join(direct_name.split(' '))
+    if not os.path.exists(img_path):
+        os.makedirs(img_path)
     num = 1
     for url in kwgs[0]:
         suffix = os.path.splitext(url)[1]
-        name = direct_name.split(' ')[0]
-        filename = "{path}/{name}{num}{suffix}".format(path=img_path, name=name, num=num, suffix=suffix)
+        name = direct_name.split(' ')[0].strip()
+        filename = "{name}{num}{suffix}".format(name=name, num=num, suffix=suffix)
+        filepath = os.path.join(img_path, filename)
 
-        with open(filename, 'wb') as f:
+        with open(filepath, 'wb') as f:
             f.write(requests.get(url).content)
-
         num += 1

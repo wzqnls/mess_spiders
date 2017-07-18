@@ -21,8 +21,9 @@ class A17jitaSpider(scrapy.Spider):
 
         post_nodes = response.css(".bbda .xs2 a::attr(href)").extract()
         for node in post_nodes:
-            post_url = node[8:]
-            url = parse.urljoin(response.url, post_url)
+            # 截取url部分元素
+            post_url = node.split('/')[-1]
+            # url = parse.urljoin(response.url, post_url)
             try:
                 yield Request(url=parse.urljoin(response.url, post_url), callback=self.parse_whole_url, dont_filter=False)
             except Exception as e:
@@ -37,12 +38,15 @@ class A17jitaSpider(scrapy.Spider):
         # download_image(response)
 
         title = response.css(".hm h1::text").extract_first("")
-        whole_page_url = response.css(".bm.vw .pg a::attr('href')").extract_first()
+        whole_page_url = response.css(".bm.vw .pg a::attr('href')").extract_first("")
+        if not whole_page_url:
+            whole_page_url = response.url
 
         yield Request(url=whole_page_url, callback=self.parse_detail)
 
-    def parse_detail(self, response):
-        path = os.getcwd() + "/图片谱"
+    @staticmethod
+    def parse_detail(response):
+        path = os.getcwd() + os.sep +"图片谱"
         if not os.path.exists(path):
             os.makedirs(path)
         title = response.css(".hm h1::text").extract_first("")
