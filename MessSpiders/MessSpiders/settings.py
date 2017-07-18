@@ -65,9 +65,18 @@ COOKIES_ENABLED = False
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'MessSpiders.pipelines.MessspidersPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'MessSpiders.pipelines.MessspidersPipeline': 300,
+    'scrapy.pipelines.images.ImagesPipeline': 1,
+}
+
+# 项目路径配置
+PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(PROJECT_DIR)
+sys.path.insert(0, os.path.join(BASE_DIR))
+
+IMAGES_URLS_FIELD = "front_image_url"
+IMAGES_STORE = os.path.join(PROJECT_DIR, 'images')
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -92,7 +101,3 @@ COOKIES_ENABLED = False
 
 USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36"
 
-# 项目路径配置
-PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
-BASE_DIR = os.path.dirname(PROJECT_DIR)
-sys.path.insert(0, os.path.join(BASE_DIR))
