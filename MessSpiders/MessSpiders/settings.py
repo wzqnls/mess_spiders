@@ -66,8 +66,10 @@ COOKIES_ENABLED = False
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'MessSpiders.pipelines.MessspidersPipeline': 300,
-    'scrapy.pipelines.images.ImagesPipeline': 1,
+    # 'MessSpiders.pipelines.JsonExporterPipeline': 2,
+    # 'MessSpiders.pipelines.MessspidersPipeline': 300,
+    # 'scrapy.pipelines.images.ImagesPipeline': 1,
+    'MessSpiders.pipelines.MysqlTwistedPipeline': 1,
 }
 
 # 项目路径配置
@@ -101,3 +103,7 @@ IMAGES_STORE = os.path.join(PROJECT_DIR, 'images')
 
 USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36"
 
+MYSQL_HOST = 'localhost'
+MYSQL_DBNAME = 'article_apider'
+MYSQL_USER = 'root'
+MYSQL_PASSWORD = '666'

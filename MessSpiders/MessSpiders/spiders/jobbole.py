@@ -8,7 +8,7 @@ from scrapy.loader import ItemLoader
 from scrapy import signals
 from urllib import parse
 
-from MessSpiders.items import JobBoleArticleItem
+from MessSpiders.items import JobBoleArticleItem, ArticleItemLoader
 from MessSpiders.utils.common import get_md5
 
 class JobboleSpider(scrapy.Spider):
