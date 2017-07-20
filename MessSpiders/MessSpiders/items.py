@@ -12,11 +12,6 @@ import scrapy
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import MapCompose, TakeFirst, Join
 
-from w3lib.html import remove_tags
-
-from ArticleSpider.utils.common import extract_num
-from ArticleSpider.settings import SQL_DATE_FORMAT, SQL_DATETIME_FORMAT
-
 
 class MessspidersItem(scrapy.Item):
     # define the fields for your item here like:
@@ -43,6 +38,7 @@ def get_nums(value):
         nums = int(match_re.group(1))
     else:
         nums = 0
+    return nums
 
 
 def remove_comment_tags(value):

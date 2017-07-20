@@ -11,6 +11,7 @@ from urllib import parse
 from MessSpiders.items import JobBoleArticleItem, ArticleItemLoader
 from MessSpiders.utils.common import get_md5
 
+
 class JobboleSpider(scrapy.Spider):
     name = 'jobbole'
     allowed_domains = ['blog.jobbole.com']

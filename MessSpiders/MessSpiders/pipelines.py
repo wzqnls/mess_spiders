@@ -98,7 +98,7 @@ class MysqlTwistedPipeline(object):
 
     def do_insert(self, cursor, item):
         insert_sql = """
-                            insert into jobbole_article(title, url, create_date, fav_nums)
-                            VALUES (%s, %s, %s, %s)
-                        """
-        cursor.execute(insert_sql, (item["title"], item["url"], item["create_date"], item["fav_nums"]))
+                    insert into jobbole_article(title, url_object_id, url, create_date, fav_nums, praise_nums, comment_nums, tags, content)\
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE content=VALUES(url_object_id)
+                """
+        cursor.execute(insert_sql, (item["title"], item["url_object_id"], item["url"], item["create_date"], item["fav_nums"], item["praise_nums"], item["comment_nums"], item["tags"], item["content"]))
