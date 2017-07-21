@@ -6,7 +6,8 @@
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
-
+from scrapy.http import HtmlResponse
+from selenium import webdriver
 
 class MessspidersSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -54,3 +55,16 @@ class MessspidersSpiderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class JsPageMiddleware(object):
+    # 通过chrome请求动态网页
+    def process_request(self, request, spider):
+        if spider.name == "jianshu":
+            browser = webdriver.Chrome(executable_path="/home/lee/Downloads/chromedriver")
+            browser.get(request.url)
+            import time
+            time.sleep(3)
+            print("访问{}".format(request.url))
+
+            return HtmlResponse(url=browser.current_url, body=browser.page_source, encoding='utf8', request=request)
