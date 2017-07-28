@@ -55,7 +55,7 @@ COOKIES_ENABLED = False
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
    # 'MessSpiders.middlewares.MyCustomDownloaderMiddleware': 543,
-    'MessSpiders.middlewares.JsPageMiddleware': 1,
+   #  'MessSpiders.middlewares.JsPageMiddleware': 1,
 }
 
 # Enable or disable extensions
@@ -70,7 +70,7 @@ ITEM_PIPELINES = {
     # 'MessSpiders.pipelines.JsonExporterPipeline': 2,
     # 'MessSpiders.pipelines.MessspidersPipeline': 300,
     # 'scrapy.pipelines.images.ImagesPipeline': 1,
-    'MessSpiders.pipelines.MysqlTwistedPipeline': 1,
+    # 'MessSpiders.pipelines.MysqlTwistedPipeline': 1,
 }
 
 # 项目路径配置
